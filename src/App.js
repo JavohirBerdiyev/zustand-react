@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Form from './Form';
+import People from './People';
+import useStore from './store';
+
 
 function App() {
+  const count = useStore(state => state.count);
+  const addCount = useStore(state => state.addCount);
+  const toggleDark = useStore(state => state.toggleDark);
+  const dark = useStore(state => state.dark);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ background: dark ? '#fff' : '#333' }}>
+      <style>{`body { background-color: ${dark ? '#fff' : '#333'};  color: ${!dark ? '#fff' : '#333'};}`}</style>
+      <h1 onClick={addCount}>Hello World {count}</h1>
+      <Form />
+      <People />
+      <button onClick={toggleDark}>Toggle Dark</button>
     </div>
   );
 }
